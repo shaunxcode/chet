@@ -1,0 +1,5 @@
+Chet is a light weight REST oriented php framework. 
+
+The name is taken from the late, great, Chet Baker.
+
+php 5.3 + only as it fully uses and abuses all of the features php has. Namespaces, __callStatic, lambdas etc. 
