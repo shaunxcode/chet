@@ -4,6 +4,20 @@ The name is taken from the late, great, Chet Baker.
 
 php 5.3 + only as it fully uses and abuses all of the features php has. Namespaces, __callStatic, lambdas etc. 
 
+For a basic site index.php is as simple as: 
+
+namespace Chet;
+
+require_once '../Chet.php';
+
+Get('/person/$id', function($id) {
+	return array(
+		'person' => Person::get($id));});
+
+Dispatch();
+
+The view is assumed to be the name of the route up until variable capture so in this case it would look for a view called 'person.php' in the views directory. 
+
 One of the greatest vices Chet has is found on the view side of things. Rather than using markup and or some sort of custom templating language/parser I have opted to take the functional approach. If you have ever used CLWHO you should feel at home:
 
 namespace html;
