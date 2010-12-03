@@ -14,9 +14,13 @@ Get('/person/$id', function($id) {
 	return array(
 		'person' => Person::get($id));});
 
+Get('/people', function() { 
+	return array(
+		'people' => Person::getAll());});
+
 Dispatch();
 
-The view is assumed to be the name of the route up until variable capture so in this case it would look for a view called 'person.php' in the views directory. 
+The view is assumed to be the name of the route up until variable capture so in the last case it would look for a view called 'people.php' in the views directory. 
 
 One of the greatest vices Chet has is found on the view side of things. Rather than using markup and or some sort of custom templating language/parser I have opted to take the functional approach. If you have ever used CLWHO you should feel at home:
 
