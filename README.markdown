@@ -38,7 +38,7 @@ One of the greatest vices Chet has is found on the view side of things. Rather t
 					return li(klass, 'person', 
 						a('/person/'. $person->id, $person->name));}, $people))));
 
-All tags have their singular and plural forms. All attributes are constants which evaluate to their string form plus chr(0), making it possible to have keyword pairs interspersed with inner content for the tag. The only exceptions are the a tag which has a plural form of _as as "as" is a reserved keyword in php and class is klass as class is a reserved keyword. Thus the following are equivelant: 
+All tags have their singular and plural forms. All attributes are constants which evaluate to their string form plus chr(0), making it possible to have keyword pairs interspersed with inner content for the tag. The only exceptions are the a tag which has a plural form of _as as "as" is a reserved keyword in php and class is klass as class is a reserved keyword. Thus the following are equivalent: 
 
 	output(
 		div(klass, 'box', 'a'), 
@@ -48,7 +48,7 @@ All tags have their singular and plural forms. All attributes are constants whic
 	output(
 		divs(klass, 'box', 'a', 'b', 'c'));
 
-CSS is supported in a similar manner allowing mixins, inheritence etc. much like turbine. 
+CSS is supported in a similar manner allowing mixins, inheritance etc. much like turbine. All css properties are defined as constants with any dash being replaced with an underscore. 
 
 	output(
 		style(
@@ -57,3 +57,26 @@ CSS is supported in a similar manner allowing mixins, inheritence etc. much like
 				margin, 'auto',
 				border, '1px solid ' . Color('Borders'),
 				padding, Size('Boxes')))); 
+	
+	#S is a shortcut for Selector which comes in handy when defining nested styles
+	
+	S('#foo, #bar',
+	    color, '#FF0000',
+	    margin_left, '4px',
+	    margin_right, '4px',
+	    S('div.alpha, div.beta',
+	        font_weight, 'bold',
+	        border_radius, '4px'))
+
+	#yields 
+	
+	#foo, #bar {
+        color: #FF0000;
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+    #foo div.alpha, #foo div.beta, #bar div.alpha, #bar div.beta {
+        font-weight: bold;
+        border-radius: 4px;
+    }
+    
