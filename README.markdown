@@ -1,5 +1,9 @@
-	 _ |_  _ _|_
-	(_ | |(/_ |_ is a light weight REST oriented php framework. 
+	_____________/\/\______________________/\/\_____
+	___/\/\/\/\__/\/\__________/\/\/\____/\/\/\/\/\_
+	_/\/\________/\/\/\/\____/\/\/\/\/\____/\/\_____
+	_/\/\________/\/\__/\/\__/\/\__________/\/\_____
+	___/\/\/\/\__/\/\__/\/\____/\/\/\/\____/\/\/\___
+	________________________________________________ is a light weight, experimental, pre-production-ready, REST oriented php framework. 
 
 The name is taken from the late, great, Chet Baker.
 
