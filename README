@@ -10,9 +10,10 @@ namespace html;
 
 output(
 	div(id, 'mainDiv',
-		ul(id, 'PeoplList',
+		ul(id, 'PeopleList',
 			array_map(function($person) { 
-				return li(klass, 'person', $person->name);}, $people))));
+				return li(klass, 'person', 
+					a('/person/'. $person->id, $person->name));}, $people))));
 
 All tags have their singular and plural forms. All attributes are constants which evaluate to their string form plus chr(0), making it possible to have keyword pairs interspersed with inner content for the tag. The only exceptions are the a tag which has a plural form of _as as "as" is a reserved keyword in php and class is klass as class is a reserved keyword. Thus the following are equivelant: 
 
