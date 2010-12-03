@@ -15,7 +15,9 @@ class Application {
 	
 	public static $routes = array(
 		'get' => array(),
-		'post' => array());
+		'post' => array(),
+		'put' => array(),
+		'delete' => array());
 
 	public static function route($uri, $method) {
 		if(strpos($uri, self::$base) == 0) {
@@ -96,6 +98,10 @@ class Application {
 
 function Param($name, $default = false) {
 	return isset(Application::$params[$name]) ? Application::$params[$name] : $default;
+}
+
+function Params() { 
+	return Application::$params;
 }
 
 function Base($value = false) {

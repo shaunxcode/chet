@@ -12,20 +12,38 @@ php 5.3 + only as it fully uses and abuses all of the features php has. Namespac
 For a basic site index.php is as simple as: 
 
 	namespace Chet;
-
+	
 	require_once '../Chet.php';
 
+	use \Model\Person;
+	
+	Container('site'); 
+
+	Put('/person', function() { 
+		return array(
+			'id' => Person::create(Params()));});
+		
 	Get('/person/$id', function($id) {
 		return array(
 			'person' => Person::get($id));});
-
+			
 	Get('/people', function() { 
 		return array(
 			'people' => Person::getAll());});
 
 	Dispatch();
 
+The Container function sets the overall, well, container to be used by the site. Thus you may call it inside of an action if you need to. 
+
+Params is a function which returns the post/request/url variables. Param('name', [default = false]) returns a given param, if not found it returns the default. In the case of Get person the 'id' param can be accessed via Param('id') or as shown you can define it as an argument of the action. 
+
+If an action returns an associative array it is extracted before loading the view so the variables may be directly accessed i.e. in the last example the $people variable would be accessible. 
+
+If a request is made with a .json suffix returned value of the action is given as json circumventing the rest of the site dispatching.
+
 The view is assumed to be the name of the route up until variable capture so in the last case it would look for a view called 'people.php' in the views directory. 
+
+Not all views have to have explicit routes/actions. If no route is matched but a view of the same name exists it will use that. This is nice for content which does not need to communicate with models/business logic. 
 
 One of the greatest vices Chet has is found on the view side of things. Rather than using markup and or some sort of custom templating language/parser I have opted to take the functional approach. If you have ever used CLWHO you should feel at home:
 
@@ -48,7 +66,7 @@ All tags have their singular and plural forms. All attributes are constants whic
 	output(
 		divs(klass, 'box', 'a', 'b', 'c'));
 
-CSS is supported in a similar manner allowing mixins, inheritance etc. much like turbine. All css properties are defined as constants with any dash being replaced with an underscore. 
+CSS is supported in a similar manner allowing mixins, inheritance etc. much like turbine, https://github.com/SirPepe/Turbine,  (in fact the examples below are mostly adapted from the turbine docs). All css properties are defined as constants with any dash being replaced with an underscore. 
 
 	output(
 		style(
@@ -79,4 +97,33 @@ CSS is supported in a similar manner allowing mixins, inheritance etc. much like
         font-weight: bold;
         border-radius: 4px;
     }
+
+	#The usefulness of this all is more apparent with something like:
+	
+	S('#header, #footer',
+	    S('ul, ol, p',
+	        S('a:link, a:visited',
+	            text_decoration, 'underline'),
+	        S('a:active, a:hover',
+	            text_decoration, 'none')))
+	
+	#yields
+	
+	#header ul a:link, #header ul a:visited,
+	#header ol a:link, #header ol a:visited,
+	#header p a:link, #header p a:visited,
+	#footer ul a:link, #footer ul a:visited,
+	#footer ol a:link, #footer ol a:visited,
+	#footer p a:link, #footer p a:visited {
+		text-decoration: underline;
+	}
+	#header ul a:active, #header ul a:hover,
+	#header ol a:active, #header ol a:hover,
+	#header p a:active, #header p a:hover,
+	#footer ul a:active, #footer ul a:hover,
+	#footer ol a:active, #footer ol a:hover,
+	#footer p a:active, #footer p a:hover {
+		text-decoration: none;
+	}
+	
     
