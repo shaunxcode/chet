@@ -158,27 +158,47 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 	}
 	register('Family');
 
+	$genders = new Collection(
+		new Gender(name, 'male'),
+		new Gender(name, 'female'));
+	$genders->keyBy('name');
+
+	$colors = new Collection(
+		new Color(
+			name, 'blue',
+			hex, new Hex('0000FF')),
+		new Color(
+			name, 'blonde',
+			hex, new Hex('FF00FF')),
+		new Color(
+			name, 'green', 
+			hex, new Hex('00FF00')),
+		new color(
+			name, 'black',
+			hex, new Hex('000000')));
+	$colors->keyBy('name');
+
 	$family = new Family(
 		surName, 'Wilson',
 		father, new Person(
 			name, 'peter',
-			gender, Gender::$male,
-			eyeColor, Color::$blue,
-			hairColor, Color::$blonde),
+			gender, $genders(male);
+			eyeColor, $colors(blue),
+			hairColor, $colors(blonde)),
 		mother, new Person(
 			name, 'mary',
-			gender, Gender::$female,
-			eyeColor, Color::$green,
-			hairColor, Color::$black),
+			gender, $genders(female),
+			eyeColor, $colors(green),
+			hairColor, $colors(black)),
 		children, new Collection(
 			new Person(
 				name, 'phillip',
-				gender, Gender::$male,
-				eyeColor, Color::$blue,
-				hairColor:: Color::$black),
+				gender, $genders(male),
+				eyeColor, $colors(blue),
+				hairColor:: $colors(black)),
 			new Person(
 				name, 'shera',
-				gender, Gender::$female,
-				eyeColor, Color::$green, 
-				hairColor, Color::$blonde)));
+				gender, $genders(female),
+				eyeColor, $colors(green), 
+				hairColor, $colors(blonde))));
 
