@@ -167,7 +167,7 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 		new Color(
 			name, 'green', 
 			hex, new Hex('00FF00')),
-		new color(
+		new Color(
 			name, 'black',
 			hex, new Hex('000000')))->keyBy(name);
 
