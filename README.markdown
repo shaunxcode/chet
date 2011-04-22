@@ -195,7 +195,7 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 				name, 'phillip',
 				gender, $genders(male),
 				eyeColor, $colors(blue),
-				hairColor:: $colors(black)),
+				hairColor, $colors(black)),
 			new Person(
 				name, 'shera',
 				gender, $genders(female),
