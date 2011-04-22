@@ -126,4 +126,59 @@ CSS is supported in a similar manner allowing mixins, inheritance etc. much like
 		text-decoration: none;
 	}
 	
-    
+   
+Models: 
+The chet ORM provides a nice wrapper around the basic PDO crud but also yields an expressive and minimal approach to defining relationships. By registering a model once you ahve defined the class you are in fact creating a valid "type" which can be used in future model definitions in both a singular and plural manner (by prefixing it w/ Many). All of the properties of the model are also defined as constants making definition of objects similar to the CSS magic. e.g: 
+
+	namespace Model;
+
+	class Color extends Model {
+		public $name = String;
+		public $hex = Hex;
+	}
+	register('Color');
+
+	class Gender extends Model {
+		public $name = String;
+	}
+
+	class Person extends Model {
+		public $name = String;
+		public $gender = Gender;
+		public $eyeColor = Color;
+		public $hairColor = Color;
+	}
+	register('Person');
+
+	class Family extends Model {
+		public $surName = String;
+		public $father = Person;
+		public $mother = Person;
+		public $children = ManyPerson;
+	}
+	register('Family');
+
+	$family = new Family(
+		surName, 'Wilson',
+		father, new Person(
+			name, 'peter',
+			gender, Gender::$male,
+			eyeColor, Color::$blue,
+			hairColor, Color::$blonde),
+		mother, new Person(
+			name, 'mary',
+			gender, Gender::$female,
+			eyeColor, Color::$green,
+			hairColor, Color::$black),
+		children, new Collection(
+			new Person(
+				name, 'phillip',
+				gender, Gender::$male,
+				eyeColor, Color::$blue,
+				hairColor:: Color::$black),
+			new Person(
+				name, 'shera',
+				gender, Gender::$female,
+				eyeColor, Color::$green, 
+				hairColor, Color::$blonde)));
+
