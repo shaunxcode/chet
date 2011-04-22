@@ -2,8 +2,8 @@
 	___/\/\/\/\__/\/\__________/\/\/\____/\/\/\/\/\_ 
 	_/\/\________/\/\/\/\____/\/\/\/\/\____/\/\_____
 	_/\/\________/\/\__/\/\__/\/\__________/\/\_____ is a light weight, experimental,
-	___/\/\/\/\__/\/\__/\/\____/\/\/\/\____/\/\/\___ pre-production-ready, REST oriented
-	________________________________________________ php 5.3+ web framework
+	___/\/\/\/\__/\/\__/\/\____/\/\/\/\____/\/\/\___ pre-production-ready, appositive expression friendly,
+	________________________________________________ REST oriented, php 5.3+ web framework
 
 The name is taken from the late, great, Chet Baker.
 
@@ -17,8 +17,6 @@ For a basic site index.php is as simple as:
 
 	use \Model\Person;
 	
-	Container('site'); 
-
 	Put('/person', function() { 
 		return array(
 			'id' => Person::create(Params()));});
@@ -30,8 +28,6 @@ For a basic site index.php is as simple as:
 	Get('/people', function() { 
 		return array(
 			'people' => Person::getAll());});
-
-	Dispatch();
 
 The Container function sets the overall, well, container to be used by the site. Thus you may call it inside of an action if you need to. 
 
@@ -48,6 +44,8 @@ Not all views have to have explicit routes/actions. If no route is matched but a
 One of the greatest vices Chet has is found on the view side of things. Rather than using markup and or some sort of custom templating language/parser I have opted to take the functional approach. If you have ever used CLWHO you should feel at home:
 
 	namespace html;
+
+	inside('site');
 
 	output(
 		div(id, 'mainDiv',
@@ -136,7 +134,6 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 		public $name = String;
 		public $hex = Hex;
 	}
-	register('Color');
 
 	class Gender extends Model {
 		public $name = String;
@@ -148,7 +145,6 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 		public $eyeColor = Color;
 		public $hairColor = Color;
 	}
-	register('Person');
 
 	class Family extends Model {
 		public $surName = String;
@@ -156,14 +152,12 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 		public $mother = Person;
 		public $children = ManyPerson;
 	}
-	register('Family');
 
-	$genders = new Collection(
+	$genders = Many(
 		new Gender(name, 'male'),
-		new Gender(name, 'female'));
-	$genders->keyBy('name');
+		new Gender(name, 'female'))->keyBy('name');
 
-	$colors = new Collection(
+	$colors = Many(
 		new Color(
 			name, 'blue',
 			hex, new Hex('0000FF')),
@@ -175,8 +169,7 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 			hex, new Hex('00FF00')),
 		new color(
 			name, 'black',
-			hex, new Hex('000000')));
-	$colors->keyBy('name');
+			hex, new Hex('000000')))->keyBy('name');
 
 	$family = new Family(
 		surName, 'Wilson',
@@ -190,7 +183,7 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 			gender, $genders(female),
 			eyeColor, $colors(green),
 			hairColor, $colors(black)),
-		children, new Collection(
+		children, Many(
 			new Person(
 				name, 'phillip',
 				gender, $genders(male),
