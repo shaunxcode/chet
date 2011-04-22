@@ -155,7 +155,7 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 
 	$genders = Many(
 		new Gender(name, 'male'),
-		new Gender(name, 'female'))->keyBy('name');
+		new Gender(name, 'female'))->keyBy(name);
 
 	$colors = Many(
 		new Color(
@@ -169,7 +169,7 @@ The chet ORM provides a nice wrapper around the basic PDO crud but also yields a
 			hex, new Hex('00FF00')),
 		new color(
 			name, 'black',
-			hex, new Hex('000000')))->keyBy('name');
+			hex, new Hex('000000')))->keyBy(name);
 
 	$family = new Family(
 		surName, 'Wilson',
