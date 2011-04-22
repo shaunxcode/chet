@@ -128,7 +128,7 @@ CSS is supported in a similar manner allowing mixins, inheritance etc. much like
 	
    
 Models: 
-The chet ORM provides a nice wrapper around the basic PDO crud but also yields an expressive and minimal approach to defining relationships. By registering a model once you ahve defined the class you are in fact creating a valid "type" which can be used in future model definitions in both a singular and plural manner (by prefixing it w/ Many). All of the properties of the model are also defined as constants making definition of objects similar to the CSS magic. e.g: 
+The chet ORM provides a nice wrapper around the basic PDO crud but also yields an expressive and minimal approach to defining relationships. By registering a model once you have defined the class you are in fact creating a valid "type" which can be used in future model definitions in both a singular and plural manner (by prefixing it w/ Many). All of the properties of the model are also defined as constants making definition of objects similar to the CSS magic. There are a number of "primitive models" (Int, String, Hex, Date, Time, DateTime) These are the "atoms" of which your models should be composed of. e.g: 
 
 	namespace Model;
 
